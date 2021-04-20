@@ -1,0 +1,29 @@
+name: riverpod_forms
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  equatable: ^2.0.0
+  formz: ^0.4.0-nullsafety.0
+  freezed_annotation: ^0.14.1
+  hooks_riverpod: ^0.14.0+1
+  i18n_extension: ^4.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^1.12.2
+  freezed: ^0.14.1+2
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,18 @@
+{
+  "error": false,
+  "category": "Programming",
+  "type": "twopart",
+  "setup": "How many programmers does it take to screw in a light bulb?",
+  "delivery": "None. It's a hardware problem.",
+  "flags": {
+    "nsfw": false,
+    "religious": false,
+    "political": false,
+    "racist": false,
+    "sexist": false,
+    "explicit": false
+  },
+  "id": 1,
+  "safe": true,
+  "lang": "en"
+}
