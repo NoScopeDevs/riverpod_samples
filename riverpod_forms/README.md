@@ -1,6 +1,6 @@
 # riverpod_forms
 
-A new Flutter project.
+How to use forms in riverpod. 
 
 ## Getting Started
 

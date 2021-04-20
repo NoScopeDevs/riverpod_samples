@@ -1,7 +1,6 @@
 # riverpod_await_for_provider
 
-A new Flutter project.
-
+How to use a StateProvider with a value from other provider.
 ## Getting Started
 
 This project is a starting point for a Flutter application.

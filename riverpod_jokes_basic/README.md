@@ -1,6 +1,6 @@
 # riverpod_jokes_basic
 
-A new Flutter project.
+Flutter basic JokesApp with complete flow of state management, error handling, and API call.
 
 ## Getting Started
 
