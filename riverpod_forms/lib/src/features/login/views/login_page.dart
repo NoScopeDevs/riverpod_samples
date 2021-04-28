@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:formz/formz.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_forms/src/core/forms/models/email.dart';
-import '../logic/login_provider.dart';
+import 'package:riverpod_forms/src/features/login/logic/login_provider.dart';
 
 ///LoginPage
 class LoginPage extends StatelessWidget {
@@ -22,137 +21,82 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('Riverpod Forms'),
       ),
-      body: const _Form(),
-    );
-  }
-}
-
-class _Form extends StatelessWidget {
-  const _Form();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _Email(),
-          SizedBox(height: 20.0),
-          _Date(),
-          SizedBox(height: 20.0),
-          _Password(),
-          SizedBox(height: 20.0),
-          _SubmitButton(),
-        ],
-      ),
-    );
-  }
-}
-
-class _Email extends ConsumerWidget {
-  const _Email();
-
-  @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    print('Email');
-    final email = watch(emailProvider);
-    return TextFormField(
-      onChanged: context.read(loginNotifierProvider.notifier).emailChanged,
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        labelText: 'Email',
-        errorText: email.invalid ? email.error?.message : null,
-      ),
-    );
-  }
-}
-
-class _Date extends HookWidget {
-  const _Date();
-
-  @override
-  Widget build(BuildContext context) {
-    print('Date');
-
-    final date = useProvider(
-      loginNotifierProvider.select((state) => state.date),
-    );
-
-    final dateController = useTextEditingController(
-      text: date.value.toString(),
-    );
-
-    useEffect(
-      () {
-        dateController.text = date.value.toString();
-      },
-      [date],
-    );
-
-    return GestureDetector(
-      onTap: () async {
-        final selectedDate = await showDatePicker(
-          context: context,
-          initialDate: date.value,
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2025),
-          helpText: 'Select booking date', // Can be used as title
-          cancelText: 'Not now',
-          confirmText: 'Book',
-        );
-
-        context.read(loginNotifierProvider.notifier).dateChanged(selectedDate);
-      },
-      child: AbsorbPointer(
-        child: TextFormField(
-          controller: dateController,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            errorText: date.invalid ? 'Invalid Date' : null,
-          ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20.0,
+        ),
+        child: Column(
+          children: [
+            _Email(),
+            _Password(),
+            _SubmitButton(),
+          ],
         ),
       ),
     );
   }
 }
 
-class _Password extends HookWidget {
-  const _Password();
+class _Email extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final email = watch(emailProvider);
 
+    return TextFormField(
+      onChanged: (value) {
+        context.read(loginNotifierProvider.notifier).changeEmail(value);
+      },
+      decoration: InputDecoration(
+        labelText: 'Email',
+        errorText: email.invalid ? email.error?.toString() : null,
+      ),
+    );
+  }
+}
+
+class _Password extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    print('Password');
-
     final password = useProvider(
-      loginNotifierProvider.select((state) => state.password),
+      loginNotifierProvider.select(
+        (state) => state.password,
+      ),
     );
+
     return TextFormField(
-      onChanged: context.read(loginNotifierProvider.notifier).passwordChanged,
-      keyboardType: TextInputType.text,
+      onChanged: (value) {
+        context.read(loginNotifierProvider.notifier).changePassword(value);
+      },
       decoration: InputDecoration(
         labelText: 'Password',
-        errorText: password.invalid ? 'invalid password' : null,
+        errorText: password.invalid ? password.error?.toString() : null,
       ),
     );
   }
 }
 
 class _SubmitButton extends HookWidget {
-  const _SubmitButton();
-
   @override
   Widget build(BuildContext context) {
     final status = useProvider(
-      loginNotifierProvider.select((state) => state.status),
+      loginNotifierProvider.select(
+        (state) => state.status,
+      ),
     );
 
     return ElevatedButton(
-      onPressed: status.isValidated ? () {} : null,
-      child: Text('Press Me'),
+      child: Text('Submit'),
+      onPressed: status.isInvalid ? null : () {},
     );
+  }
+}
+
+class _Form extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    final emailController = useTextEditingController();
+    return Container();
   }
 }
