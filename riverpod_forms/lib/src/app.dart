@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_forms/src/features/login/views/login_page.dart';
+import 'package:riverpod_forms/src/features/checkout/views/checkout_page.dart';
 
 class RiverpodForms extends StatelessWidget {
   @override
@@ -9,7 +9,7 @@ class RiverpodForms extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: const CheckoutPage(),
     );
   }
 }

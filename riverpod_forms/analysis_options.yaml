@@ -1,0 +1,18 @@
+# Very Good Dart analyzer settings and best practices 
+# used internally at Very Good Ventures.
+# For more info, see https://pub.dev/packages/very_good_analysis.
+include: package:very_good_analysis/analysis_options.yaml
+
+# For lint rules and documentation, see http://dart-lang.github.io/linter/lints.
+# Uncomment to specify additional rules.
+linter:
+  rules:
+    public_member_api_docs: false
+    use_key_in_widget_constructors: false
+    lines_longer_than_80_chars: false
+
+
+analyzer:
+  exclude:
+    - "*/.g.dart"
+    - "*/.freezed.dart"
