@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testing_riverpod_statenotifier/src/features/async_counter%20/async_counter.dart';
 import 'package:testing_riverpod_statenotifier/src/features/simple_counter/simple_counter.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SimpleCounterPage(),
+      home: const AsyncCounterPage(),
     );
   }
 }
